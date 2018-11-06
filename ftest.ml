@@ -2,6 +2,9 @@ open Graph
 
 let () =
 
+  let g = Gfile.from_file "graph1" in
+  Gfile.export "graph1_dot.txt" g ;
+
   if Array.length Sys.argv <> 5 then
     begin
       Printf.printf "\nUsage: %s infile source sink outfile\n\n%!" Sys.argv.(0) ;

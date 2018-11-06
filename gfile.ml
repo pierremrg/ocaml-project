@@ -72,3 +72,23 @@ let from_file path =
   close_in infile ;
   final_graph
   
+
+
+let export path graph =
+
+  (* Open a write-file. *)
+  let ff = open_out path in
+
+  (* Write in this file. *)
+  fprintf ff "digraph G {\n" ;
+  fprintf ff "\trankdir=LR;\n" ;
+  fprintf ff "\tsize=\"10\"\n" ;
+  fprintf ff "\tnode [shape = circle];\n" ;
+
+  (* Write all nodes *)
+  v_iter graph (fun id l -> List.iter (fun (dest, label) -> fprintf ff "\t%s -> %s [ label = \"%s\" ];\n"   id dest label) l) ;
+
+  fprintf ff "}\n" ;
+  
+  close_out ff ;
+  ()
