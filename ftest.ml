@@ -1,46 +1,12 @@
 open Graph
+open FF
+open Routes
 
 let () =
 
-  
-
-  let rec is_in_forbidden s = function
-  | [] -> false
-  | x::rest ->
-  if x = s then true
-  else is_in_forbidden s rest in
-
-
-
-  let find_path g current dest =
-
-  let rec prochain_atteint arc_s forbidden=
-    let rec affiche_arcs = function
-      | [] -> ()
-      | (id_dest, _)::rest-> Printf.printf "%s/%!" id_dest; affiche_arcs rest in
-
-    affiche_arcs arc_s;
-  match arc_s with
-  | [] -> None
-  | (id_dest, _)::rest -> if is_in_forbidden id_dest forbidden then prochain_atteint rest forbidden else Some id_dest
-  in
-
-
-  let rec chemin acu current =
-    Printf.printf "current : %s\n%!" current;
-  match prochain_atteint (out_arcs g current) acu with
-  | None -> None
-  | Some a -> 
-  if a = dest 
-  then Some (List.rev (dest::current::acu))
-  else chemin (current::acu) a
-
-  in chemin [] current in
 
   (*let g = Gfile.from_file "graph1" in*)
   (*Gfile.export "graph1_dot.txt" g;*)
-
-  
 
   (*if Array.length Sys.argv <> 5 then
     begin
@@ -57,17 +23,25 @@ let () =
   in*)
 
   (* Open file *)
-  let infile = "graph1" in
-  let graph = Gfile.from_file infile in
+  let infile = "graphe_routes" in
+  let graph = Graph.map (Routes.read_carte_routiere infile) int_of_string in
 
-  let chemin = find_path graph "3" "1" in
+  Gfile.export "test_routes.txt" (Graph.map graph string_of_int);
 
-  let rec affiche_chemin = function
-    | None -> Printf.printf "Pas de chemin\n%!"
-    | Some [] -> Printf.printf "end\n%!"
-    | Some (x::rest) -> Printf.printf "%s\n%!" x; affiche_chemin (Some rest) in
+  let flux_max = FF.ford_fulkerson graph Sys.argv.(1) Sys.argv.(2) in
 
-  affiche_chemin chemin;
+  let () = (Printf.printf "Flux maximum : %d\n%!" flux_max) in
+
+  (*let chemin = FF.find_path graph Sys.argv.(1) Sys.argv.(2) in
+
+  FF.affiche_chemin chemin;
+
+  let min = FF.min_label graph chemin in
+  let () = (Printf.printf "Minimum : %d\n%!" min) in
+
+  let g = FF.update_graph graph chemin min in
+
+  Gfile.export "result.txt" (Graph.map g string_of_int);*)
 
   (* Rewrite the graph that has been read. *)
   (*let () = Gfile.write_file outfile graph in*)

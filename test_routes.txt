@@ -1,0 +1,8 @@
+digraph G {
+	rankdir=LR;
+	size="10"
+	node [shape = circle];
+	Paris -> Lyon [ label = "30" ];
+	Toulouse -> Lyon [ label = "20" ];
+	Toulouse -> Paris [ label = "50" ];
+}

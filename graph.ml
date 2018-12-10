@@ -51,5 +51,5 @@ let rec map gr f =
     in
       match gr with
         | [] -> []
-        | (id_n,l)::rest_noeuds -> (id_n, loop_arcs l)::map rest_noeuds f;;
+        | (id_n,l)::rest_noeuds -> (id_n, loop_arcs l)::map rest_noeuds f
 
