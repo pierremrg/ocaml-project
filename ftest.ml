@@ -23,10 +23,12 @@ let () =
   in*)
 
   (* Open file *)
-  let infile = "graphe_routes" in
+
+  let infile = "routes/graphe_routes" in
+
   let graph = Graph.map (Routes.read_carte_routiere infile) int_of_string in
 
-  Gfile.export "test_routes.txt" (Graph.map graph string_of_int);
+  Gfile.export "routes/test_routes.txt" (Graph.map graph string_of_int);
 
   let flux_max = FF.ford_fulkerson graph Sys.argv.(1) Sys.argv.(2) in
 

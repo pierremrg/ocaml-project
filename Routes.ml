@@ -26,11 +26,7 @@ let read_carte_routiere path =
       let line = input_line infile in
       let graph2 =
         (* Ignore empty lines *)
-        if line = "" then graph
-
-        (* The first character of a line determines its content : v or e.
-         * Lines not starting with v or e are ignored. *)
-
+        if (String.length line) = 1 then graph
         else
         try
         	let pos = (String.index line '>') in
@@ -38,8 +34,8 @@ let read_carte_routiere path =
         with
         	| Not_found ->  match (String.sub line 0 5) with
         										| "Ville" -> read_ville graph line
-          									| _ -> graph
-      in                 
+          										| _ -> graph
+      in                 	
       loop graph2        
     with End_of_file -> graph
   in
