@@ -26,15 +26,15 @@ let read_carte_routiere path =
       let line = input_line infile in
       let graph2 =
         (* Ignore empty lines *)
-        if (String.length line) = 1 then graph
+        if (String.length line) <= 3 then graph
         else
-        try
-        	let pos = (String.index line '>') in
-        		read_route graph line pos
-        with
-        	| Not_found ->  match (String.sub line 0 5) with
-        										| "Ville" -> read_ville graph line
-          										| _ -> graph
+          try
+          	let pos = (String.index line '>') in
+          		read_route graph line pos
+          with
+          	| Not_found ->  match (String.sub line 0 5) with
+          										| "Ville" -> read_ville graph line
+            									| _ -> graph
       in                 	
       loop graph2        
     with End_of_file -> graph
