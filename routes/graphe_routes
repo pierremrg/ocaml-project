@@ -3,7 +3,13 @@ Ville Paris
 Ville Lyon
 Ville Marseille
 Ville Clermont
+Ville Fenouillet
+Ville Rouffiac
 
 Toulouse > Paris 50
 Toulouse > Lyon 20
 Paris > Lyon 30
+Toulouse > Fenouillet 70
+Toulouse > Rouffiac 60
+Rouffiac > Fenouillet 30
+Fenouillet > Paris 10
