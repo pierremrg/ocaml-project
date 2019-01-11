@@ -2,7 +2,7 @@
 
 ## Création du fichier de données
 
-Dans le fichier graphe_routes situé dans le dossier `routes`, écrire les villes sous la forme :
+Dans le fichier `graphe_routes` situé dans le dossier `routes`, écrire les villes sous la forme :
 
     Ville nom_de_la_ville
   
@@ -20,20 +20,20 @@ Compiler le programme :
 
 Lancer le programme :
 
-> ./ftest.bytes "ville\_de\_départ" "ville\_de\_destination"
+> ./ftest.byte "ville\_de\_départ" "ville\_de\_destination"
 
-Le programme retourne la capacité maximale de marchandise transportable entre 2 villes.
+Le programme retourne la quantité maximale de marchandise (il peut s'agir d'un nombre d'éléments, d'un poids, etc.) transportable entre 2 villes, en l'utilisant l'algorithme de Ford-Fulkerson.
 
-Quelques exemples / tests unitaires
+Ci-dessous, quelques exemples / tests unitaires :
 
-> ./ftest.bytes "Toulouse" "Fenouillet"
+> ./ftest.byte "Toulouse" "Fenouillet"
 > Flux maximum : 100
 >
-> ./ftest.bytes "Toulouse" "Paris"
+> ./ftest.byte "Toulouse" "Paris"
 > Flux maximum : 60
 >
-> ./ftest.bytes "Paris" "Rouffiac"
+> ./ftest.byte "Paris" "Rouffiac"
 > Flux maximum : 0
 >
-> ./ftest.bytes "Paris" "Lyon"
+> ./ftest.byte "Paris" "Lyon"
 > Flux maximum : 30
